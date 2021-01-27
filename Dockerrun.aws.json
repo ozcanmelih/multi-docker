@@ -1,0 +1,39 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "ozcanmelih/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "ozcanmelih/multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "ozcanmelih/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "ozcanmelih/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": [
+                "client",
+                "server"
+            ]
+        }
+    ]
+}
